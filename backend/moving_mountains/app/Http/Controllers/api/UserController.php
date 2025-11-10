@@ -33,9 +33,19 @@ class UserController
     public function login(LoginUserRequest $request)
     {
         $credentials = $request->validated();
-
+    
         $user = User::where('email', $credentials['email'])->first();
+    
+        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+            return response()->json([
+                'message' => 'Invalid credentials',
+                'status' => 'error',
+                'code' => 401,
+            ], 401);
+        }
+    
         $token = $user->createToken('auth_token')->plainTextToken;
+    
         return response()->json([
             'message' => 'User logged in successfully',
             'status' => 'success',
