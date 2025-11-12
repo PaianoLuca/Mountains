@@ -1,5 +1,8 @@
 # Moving Mountains - Alpine Digital
 
+<img width="2034" height="1233" alt="Screenshot 2025-11-12 at 23 32 21" src="https://github.com/user-attachments/assets/b3cd3ffe-e6ee-43a5-919c-0a8a8871bb58" />
+
+
 A full-stack application for managing and exploring mountain information. Built with Laravel (PHP) backend and Angular (TypeScript) frontend.
 
 ## 📋 Table of Contents
