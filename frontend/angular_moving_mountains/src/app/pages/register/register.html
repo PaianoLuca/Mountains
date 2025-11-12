@@ -1,0 +1,46 @@
+<div class="register-container">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" formControlName="name" />
+      <div *ngIf="form.get('name')?.touched && form.get('name')?.errors?.['required']" style="color: red;">
+        Name is required
+      </div>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" formControlName="email" />
+      <div *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['required']" style="color: red;">
+        Email is required
+      </div>
+      <div *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['email']" style="color: red;">
+        Email is invalid
+      </div>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" />
+      <div *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['required']" style="color: red;">
+        Password is required
+      </div>
+      <div *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['minlength']" style="color: red;">
+        Password must be at least 8 characters long
+      </div>
+    </div>
+    <div>
+      <label for="password_confirmation">Password Confirmation</label>
+      <input type="password" formControlName="password_confirmation" />
+      <div *ngIf="form.get('password_confirmation')?.touched && form.get('password_confirmation')?.errors?.['required']" style="color: red;">
+        Password confirmation is required
+      </div>
+      <div *ngIf="form.get('password_confirmation')?.touched && form.get('password_confirmation')?.errors?.['minlength']" style="color: red;">
+        Password confirmation must be at least 8 characters long
+      </div>
+      <div *ngIf="form.get('password_confirmation')?.touched && form.errors?.['passwordMismatch']" style="color: red;">
+        Passwords do not match
+      </div>
+    </div>
+    <button type="submit" [disabled]="form.invalid">Register</button>
+  </form>
+  <p>Already have an account? <a routerLink="/login">Login</a></p>
+</div>

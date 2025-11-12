@@ -1,0 +1,13 @@
+<header>
+  <h1>{{ title() }}</h1>
+  <nav>
+    <a *ngIf="!auth.isAuthenticated()" routerLink="/login">Login</a>
+    <a *ngIf="!auth.isAuthenticated()" routerLink="/register">Register</a>
+    <a *ngIf="auth.isAuthenticated()" routerLink="/home">Home</a>
+    <button *ngIf="auth.isAuthenticated()" (click)="auth.logout()">Logout</button>
+  </nav>
+</header>
+
+<hr>
+
+<router-outlet></router-outlet>
