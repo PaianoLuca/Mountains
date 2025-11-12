@@ -10,3 +10,6 @@ Timeline:
 | setup angular app and services: auth, api; stores: auth; guards: auth; interceptor: auth         | 5 min | 11_11_2025 | 661f40d1422b0e2da657fa263c4329b65bba9e2b |
 | setup angular app and services: auth, api; stores: auth; guards: auth; interceptor: auth         | 20 min | 12_11_2025 | d5e9af79ae987a507f2309d45a8febc5fd1935f1 |
 | Clean version of angular initialized, login functionality implemented with registration and logout         | 25 min | 12_11_2025 | f87d3f224e6fdf48904e86fc35f2794fffe8e580 |
+| Mountains CRUD functionalities implemented and functional.         | 30 min | 12_11_2025 | b30e6dc8dee95435851bcc702ed170fd36894878 |
+
+
