@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div class="p-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="text-2xl font-bold">Mountains</h1>
+    <a routerLink="/mountains/create" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">New Mountain</a>
+  </div>
+
+  <div *ngIf="mountains().length === 0" class="text-gray-500">No mountains found.</div>
+
+  <ul class="space-y-2">
+    <li *ngFor="let mountain of mountains()" class="p-2 border rounded flex justify-between items-center hover:bg-gray-50">
+      <div>
+        <h2 class="font-semibold">{{ mountain.name }}</h2>
+        <p class="text-sm text-gray-600">{{ mountain.location }} - {{ mountain.height }}m</p>
+      </div>
+      <div class="flex space-x-2">
+        <a [routerLink]="['/mountains', mountain.id]" class="text-blue-500 hover:underline">Details</a>
+      </div>
+    </li>
+  </ul>
+</div>

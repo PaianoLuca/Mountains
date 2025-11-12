@@ -1,0 +1,27 @@
+<div class="mountain-detail-container" *ngIf="mountain">
+    <h2>Mountain Details: {{ mountain.name }}</h2>
+    <form [formGroup]="form" (ngSubmit)="update()">
+      <div>
+        <label>Name</label>
+        <input type="text" formControlName="name">
+      </div>
+      <div>
+        <label>Location</label>
+        <input type="text" formControlName="location">
+      </div>
+      <div>
+        <label>Height</label>
+        <input type="number" formControlName="height">
+      </div>
+      <div>
+        <label>Description</label>
+        <textarea formControlName="description"></textarea>
+      </div>
+      <div>
+        <label>Image URL</label>
+        <input type="text" formControlName="image">
+      </div>
+      <button type="submit" [disabled]="form.invalid">Update</button>
+      <button type="button" (click)="delete()">Delete</button>
+    </form>
+  </div>

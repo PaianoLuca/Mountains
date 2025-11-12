@@ -8,7 +8,8 @@ import { Auth } from './auth';
 
 export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn) => {
   const auth = inject(Auth);
-  const token = auth.token();
+  const token = auth.token() || localStorage.getItem('token');
+  
   if (token) {
     const cloned = req.clone({
       setHeaders: {
