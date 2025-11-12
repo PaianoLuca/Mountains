@@ -1,22 +1,6 @@
 <div class="mountain-detail-container">
-  <!-- Loading State -->
-  <div *ngIf="loading && !mountain" class="loading-container">
-    <div class="spinner"></div>
-    <p class="loading-text">Loading mountain details...</p>
-  </div>
-
-  <!-- Error State -->
-  <div *ngIf="error && !loading && !mountain" class="error-container">
-    <svg class="error-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-    </svg>
-    <p class="error-message">{{ error }}</p>
-    <button (click)="loadMountain()" class="btn-retry">Try Again</button>
-    <button routerLink="/home" class="btn-secondary">Back to Home</button>
-  </div>
-
   <!-- Form Content -->
-  <div *ngIf="mountain" class="form-wrapper">
+  <div class="form-wrapper">
     <!-- Header -->
     <div class="form-header">
       <button routerLink="/home" class="back-button" aria-label="Go back">
@@ -27,9 +11,9 @@
       </button>
       <h1 class="form-title">
         <svg class="title-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
         </svg>
-        Edit Mountain
+        Create New Mountain
       </h1>
     </div>
 
@@ -49,7 +33,7 @@
       {{ error }}
     </div>
 
-    <form [formGroup]="form" (ngSubmit)="update()" class="mountain-form">
+    <form [formGroup]="form" (ngSubmit)="create()" class="mountain-form">
       <!-- Image Preview Section -->
       <div class="form-section image-section">
         <label class="form-label">Mountain Image</label>
@@ -162,22 +146,10 @@
           <span *ngIf="saving" class="button-spinner"></span>
           <span *ngIf="!saving">
             <svg class="button-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
             </svg>
-            Save Changes
+            Create Mountain
           </span>
-        </button>
-
-        <button 
-          type="button" 
-          (click)="delete()" 
-          [disabled]="saving"
-          class="btn-danger"
-        >
-          <svg class="button-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-          </svg>
-          Delete
         </button>
 
         <button 

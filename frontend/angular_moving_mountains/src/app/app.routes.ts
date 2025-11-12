@@ -4,6 +4,7 @@ import { Register } from './pages/register/register';
 import { Home } from './pages/home/home';
 import { AuthGuard } from './core/auth/auth-guard';
 import { MountainDetail } from './pages/mountain-details/mountain-detail';
+import { MountainCreate } from './pages/mountain-create/mountain-create';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -11,6 +12,7 @@ export const routes: Routes = [
     { path: 'register', component: Register },
     { path: 'home', component: Home, canActivate: [AuthGuard] },
 
+    { path: 'mountains/create', component: MountainCreate, canActivate: [AuthGuard] },
     { path: 'mountains/:id', component: MountainDetail, canActivate: [AuthGuard] },
     { path: '**', redirectTo: 'login'},
 

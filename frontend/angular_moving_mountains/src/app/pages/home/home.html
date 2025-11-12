@@ -1,20 +1,87 @@
-<div class="p-4">
-  <div class="flex justify-between items-center mb-4">
-    <h1 class="text-2xl font-bold">Mountains</h1>
-    <a routerLink="/mountains/create" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">New Mountain</a>
+<div class="home-container">
+  <!-- Header Section -->
+  <div class="header-section">
+    <div class="header-content">
+      <div>
+        <h1 class="page-title">Discover Mountains</h1>
+        <p class="page-subtitle">Explore the world's most magnificent peaks</p>
+      </div>
+      <a routerLink="/mountains/create" class="btn-primary">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        Add New Mountain
+      </a>
+    </div>
   </div>
 
-  <div *ngIf="mountains().length === 0" class="text-gray-500">No mountains found.</div>
+  <!-- Loading State -->
+  <div *ngIf="loading()" class="loading-container">
+    <div class="spinner"></div>
+    <p class="loading-text">Loading mountains...</p>
+  </div>
 
-  <ul class="space-y-2">
-    <li *ngFor="let mountain of mountains()" class="p-2 border rounded flex justify-between items-center hover:bg-gray-50">
-      <div>
-        <h2 class="font-semibold">{{ mountain.name }}</h2>
-        <p class="text-sm text-gray-600">{{ mountain.location }} - {{ mountain.height }}m</p>
-      </div>
-      <div class="flex space-x-2">
-        <a [routerLink]="['/mountains', mountain.id]" class="text-blue-500 hover:underline">Details</a>
-      </div>
-    </li>
-  </ul>
+  <!-- Error State -->
+  <div *ngIf="error() && !loading()" class="error-container">
+    <svg class="error-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <p class="error-message">{{ error() }}</p>
+    <button (click)="loadMountains()" class="btn-retry">Try Again</button>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading() && !error() && mountains().length === 0" class="empty-container">
+    <svg class="empty-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+    </svg>
+    <h2 class="empty-title">No mountains yet</h2>
+    <p class="empty-text">No mountains found in the database.</p>
+  </div>
+
+  <!-- Mountains Grid -->
+  <div *ngIf="!loading() && !error() && mountains().length > 0" class="mountains-grid">
+    <div *ngFor="let mountain of mountains()" class="mountain-card">
+      <a [routerLink]="['/mountains', mountain.id]" class="card-link">
+        <div class="card-image-container">
+          <img
+            *ngIf="mountain.image"
+            [src]="getImageUrl(mountain.image)"
+            [alt]="mountain.name"
+            class="card-image"
+            (error)="$event.target.style.display='none'"
+          />
+          <div *ngIf="!mountain.image" class="card-image-placeholder">
+            <svg class="placeholder-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+          </div>
+          <div class="card-overlay">
+            <span class="view-details">View Details</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">{{ mountain.name }}</h2>
+            <div class="height-badge">
+              <svg class="height-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+              </svg>
+              {{ formatHeight(mountain.height) }}
+            </div>
+          </div>
+          <div class="card-location">
+            <svg class="location-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            {{ mountain.location }}
+          </div>
+          <p class="card-description" *ngIf="mountain.description">
+            {{ mountain.description.length > 120 ? (mountain.description.substring(0, 120) + '...') : mountain.description }}
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
 </div>

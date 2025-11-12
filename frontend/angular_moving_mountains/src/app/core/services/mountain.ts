@@ -8,7 +8,7 @@ import { map, Observable } from 'rxjs';
 })
 export class MountainService {
   private http = inject(HttpClient);
-  private apiUrl = '/api/mountains';
+  private apiUrl = 'http://localhost:8000/api/mountains';
 
   all(): Observable<Mountain[]> {
     return this.http.get<{data: Mountain[]}>(`${this.apiUrl}/all`)
@@ -25,11 +25,17 @@ export class MountainService {
   }
 
   create(data: Partial<Mountain>): Observable<Mountain> {
-    return this.http.post<Mountain>(`${this.apiUrl}/create`, data);
+    return this.http.post<{data: Mountain}>(`${this.apiUrl}/create`, data)
+    .pipe(
+      map(response => response.data)
+    );
   }
 
   update(id: number, data: Partial<Mountain>): Observable<Mountain> {
-    return this.http.put<Mountain>(`${this.apiUrl}/edit/${id}`, data);
+    return this.http.put<{data: Mountain}>(`${this.apiUrl}/edit/${id}`, data)
+    .pipe(
+      map(response => response.data)
+    );
   }
 
   delete(id: number): Observable<any> {

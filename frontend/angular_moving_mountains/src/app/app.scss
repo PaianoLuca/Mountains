@@ -1,0 +1,167 @@
+.logo-small {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-medium {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-text {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+// Header
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  @media (max-width: 640px) {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @media (max-width: 640px) {
+    width: 100%;
+  }
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  @media (max-width: 640px) {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+.nav-link,
+.logout-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background: transparent;
+  color: #374151;
+  position: relative;
+
+  .nav-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: #f3f4f6;
+    color: #1f2937;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+}
+
+.nav-link {
+  &.nav-active {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    color: #2563eb;
+    font-weight: 600;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+    .nav-icon {
+      color: #2563eb;
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      color: #1d4ed8;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 2px;
+      background: #2563eb;
+      border-radius: 2px;
+    }
+  }
+}
+
+.logout-btn {
+  color: #dc2626;
+  background: transparent;
+
+  .nav-icon {
+    color: #dc2626;
+  }
+
+  &:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #fca5a5;
+
+    .nav-icon {
+      color: #b91c1c;
+    }
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+}
+
+.background-image {
+  background-image: url('../../public/assets/images/mountains.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - 200px);
+  display: block;
+}
+

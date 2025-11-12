@@ -14,6 +14,8 @@ import { Auth } from '../../core/auth/auth';
 })
 export class Home {
   mountains = signal<Mountain[]>([]);
+  loading = signal<boolean>(true);
+  error = signal<string | null>(null);
   auth = inject(Auth);
   mountainService = inject(MountainService);
 
@@ -22,13 +24,28 @@ export class Home {
   }
 
   loadMountains() {
+    this.loading.set(true);
+    this.error.set(null);
     this.mountainService.all().subscribe({
       next: (data) => {
         this.mountains.set(data);
+        this.loading.set(false);
       },
       error: (error) => {
         console.error('Error loading mountains:', error);
+        this.error.set('Failed to load mountains. Please try again later.');
+        this.loading.set(false);
       }
     });
+  }
+
+  getImageUrl(image: string): string {
+    if (!image) return '';
+    if (image.startsWith('http')) return image;
+    return `http://localhost:8000/storage/${image}`;
+  }
+
+  formatHeight(height: number): string {
+    return `${height.toLocaleString()}m`;
   }
 }

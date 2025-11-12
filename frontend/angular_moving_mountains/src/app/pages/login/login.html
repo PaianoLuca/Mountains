@@ -1,14 +1,28 @@
 <div class="login-container">
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <div>
-      <label for="email">Email</label>
-      <input type="email" formControlName="email" />
-    </div>
-    <div>
-      <label for="password">Password</label>
-      <input type="password" formControlName="password" />
-    </div>
-    <button type="submit">Login</button>
-    <p>Don't have an account? <a routerLink="/register">Register</a></p>
-  </form>
+  <div class="form-wrapper">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input 
+          type="email" 
+          id="email"
+          formControlName="email" 
+          class="form-input"
+          placeholder="Enter your email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          type="password" 
+          id="password"
+          formControlName="password" 
+          class="form-input"
+          placeholder="Enter your password"
+        />
+      </div>
+      <button type="submit" class="form-button" [disabled]="form.invalid">Login</button>
+      <p class="form-footer">Don't have an account? <a routerLink="/register" class="form-link">Register</a></p>
+    </form>
+  </div>
 </div>
